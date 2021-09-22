@@ -45,10 +45,17 @@ function bullet_collision()
     for (var i = 0; i < player1.bullets.length; i++)
     {
         if (Math.abs(player1.bullets[i].position.x) >= WIDTH / 2 ||
-            Math.abs(player1.bullets[i].position.y) >= HEIGHT / 2)
+            Math.abs(player1.bullets[i].position.y) >= HEIGHT / 2 ||
+            Math.abs(player1.bullets[i].position.x) == enemy1.graphic.position.x ||
+            Math.abs(player1.bullets[i].position.y) == enemy1.graphic.position.y)
         {
             scene.remove(player1.bullets[i]);
             player1.bullets.splice(i, 1);
+            if (Math.abs(player1.bullets[i].position.x) == enemy1.graphic.position.x ||
+                Math.abs(player1.bullets[i].position.y) == enemy1.graphic.position.y)
+            {
+                enemy1.dead();
+            }
             i--;
         }
     }
